@@ -5,6 +5,8 @@
 #define SIZE_BUF 			(uint8_t)10		//колличество пакетов ожидающих подтверждения со стороны мастера
 #define NUM_REPEAT		(uint8_t)5		//колличество повторных попыток передачи
 
+#define UDP_PORT	7777
+
 //диапазон допустимых адресов для чтения и записи
 #define START_ADDR	0x20000000
 #define	STOP_ADDR		0x20020000
@@ -56,6 +58,9 @@ typedef struct
 }SendBufType;
 
 #pragma pack(pop)
+
+//задача обработчик сетевого интерфейса
+extern void vATaskRecvSend( void *pvParameters );
 
 #endif
 
