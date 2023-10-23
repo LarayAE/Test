@@ -2,8 +2,13 @@
 #define TASK2_H
 #include <stdint.h>
 
-#define SIZE_BUF 	(uint8_t)10				//колличество пакетов ожидающих подтверждения со стороны мастера
+#define SIZE_BUF 			(uint8_t)10		//колличество пакетов ожидающих подтверждения со стороны мастера
 #define NUM_REPEAT		(uint8_t)5		//колличество повторных попыток передачи
+
+//диапазон допустимых адресов для чтения и записи
+#define START_ADDR	0x20000000
+#define	STOP_ADDR		0x20020000
+#define	VALID_ADDR(addr)	((addr >= START_ADDR) && (addr < STOP_ADDR))
 
 //выравнивание структур в 1 байт
 #pragma pack(push, 1)
@@ -15,6 +20,7 @@ typedef enum
 	DATA_ACK,			//ответ ведомого на READ_CMD
 	READ_CMD,			//команда на чтение регистра
 	WRITE_CMD,		//команда на запись регистра
+	ERR_nVALID,		//ответ ведомого при получении не корректного адреса для записи
 	NUM_CMD
 }TypeCMD;
 
